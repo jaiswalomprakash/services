@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/TangerineCloud" crossContext="false" reloadable="true" debug="99">
+<!-- 	 
+	<Resource auth="Container" autoReconnect="true" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="50" maxWait="60000" 
+    name="jdbc/Tangerine" password="1test1" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/tangerine?characterEncoding=UTF-8" username="root"
+    testOnBorrow="true" testOnReturn="true" testWhileIdle="true" validationQuery="Select 1"/> 
+ -->
+ 
+ <!--  Local 
+<Resource auth="Container" autoReconnect="true" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="50" maxWait="60000" 
+    name="jdbc/Tangerine" password="Stixis,0987" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/tangerine?characterEncoding=UTF-8" username="stxadmin"
+    testOnBorrow="true" testOnReturn="true" testWhileIdle="true" validationQuery="Select 1"/>
+ -->
+ 
+
+<!--  STAGE-->
+<Resource auth="Container" autoReconnect="true" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="50" maxWait="60000" 
+    name="jdbc/Tangerine" password="t@n9erin3" type="javax.sql.DataSource" url="jdbc:mysql://52.68.18.35:3306/seniorcare?characterEncoding=UTF-8" username="root"
+    testOnBorrow="true" testOnReturn="true" timeBetweenEvictionRunsMillis ="60000"  minEvictableIdleTimeMillis = "30000" logAbandoned ="true" removeAbandoned="true" numTestsPerEvictionRun="1"/>
+ 
+
+<!--  STAGE2 
+<Resource auth="Container" autoReconnect="true" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="50" maxWait="60000" 
+    name="jdbc/Tangerine" password="t3@mAvat4" type="javax.sql.DataSource" url="jdbc:mysql://54.249.35.97:3306/tangerine?characterEncoding=UTF-8" username="root"
+    testOnBorrow="true" testOnReturn="true" testWhileIdle="true" validationQuery="Select 1"/>
+ -->
+ 
+<!--  DEV
+<Resource auth="Container" autoReconnect="true" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="50" maxWait="60000" 
+    name="jdbc/Tangerine" password="t3@mAvat4" type="javax.sql.DataSource" url="jdbc:mysql://54.92.50.149:3306/tangerine?characterEncoding=UTF-8" username="root"
+    testOnBorrow="true" testOnReturn="true" testWhileIdle="true" validationQuery="Select 1"/>
+ -->
+ 
+<!--  NTT
+<Resource auth="Container" autoReconnect="true" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="50" maxWait="60000" 
+    name="jdbc/Tangerine" password="t3@mAvat4" type="javax.sql.DataSource" url="jdbc:mysql://54.178.185.107:3306/tangerine?characterEncoding=UTF-8" username="root"
+    testOnBorrow="true" testOnReturn="true" testWhileIdle="true" validationQuery="Select 1"/>
+ -->
+</Context>

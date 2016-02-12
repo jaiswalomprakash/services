@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="account" match-catalog="services"></table-filter>
+	<table-filter match-name="actions" match-catalog="services"></table-filter>
+	<table-filter match-name="collection" match-catalog="services"></table-filter>
+	<table-filter match-name="expense" match-catalog="services"></table-filter>
+	<table-filter match-name="member_details"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="my_servcie" match-catalog="services"></table-filter>
+	<table-filter match-name="owner" match-catalog="services"></table-filter>
+	<table-filter match-name="postalcode" match-catalog="services"></table-filter>
+	<table-filter match-name="service_category"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="service_category_mapping"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="service_image_mapping"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="services" match-catalog="services"></table-filter>
+	<table-filter match-name="user_accesstoken"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="user_role_mapping"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="user_roles" match-catalog="services"></table-filter>
+	<table-filter match-name="user_service_mapping"
+		match-catalog="services">
+	</table-filter>
+	<table-filter match-name="users" match-catalog="services"></table-filter>
+</hibernate-reverse-engineering>

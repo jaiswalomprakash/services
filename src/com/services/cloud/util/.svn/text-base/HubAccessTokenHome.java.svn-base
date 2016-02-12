@@ -1,0 +1,39 @@
+package com.seniorcare.cloud.util;
+
+import java.util.logging.Logger;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import com.seniorcare.cloud.model.HubAccesstoken;
+
+public class HubAccessTokenHome
+{
+	private static Logger logger = Logger.getLogger("HubAccessTokenHome");
+
+	/**
+	 * returns accesstoken for token
+	 * 
+	 * @param token 
+	 * @return
+	 */
+	public static HubAccesstoken getAccessTokenBytoken(Session session, String token)
+	{
+		HubAccesstoken result = null;
+		result = (HubAccesstoken) session.createCriteria(HubAccesstoken.class).add(Restrictions.eq("token", token)).uniqueResult();
+		return result;
+
+	}
+
+	/**
+	 * set token
+	 * 
+	 * @param token
+	 * @return
+	 */
+	public static HubAccesstoken storeToken(Session session, HubAccesstoken token)
+	{
+		session.saveOrUpdate(token);
+		return token;
+	}
+}

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model
+END
+HubsSensorMapping.html
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/HubsSensorMapping.html
+END
+HubsSensorMappingId.html
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/HubsSensorMappingId.html
+END
+entities.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/entities.html
+END
+HubAccesstoken.html
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/HubAccesstoken.html
+END
+Hubs.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/Hubs.html
+END
+Sensor.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/Sensor.html
+END
+UserAccesstoken.html
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Tangerine/!svn/ver/871/seniorcareV2/src/entities/com/hibernate/model/UserAccesstoken.html
+END

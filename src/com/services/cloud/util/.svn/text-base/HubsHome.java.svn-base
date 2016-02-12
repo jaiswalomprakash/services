@@ -1,0 +1,37 @@
+package com.seniorcare.cloud.util;
+
+import java.util.logging.Logger;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import com.seniorcare.cloud.model.Hubs;
+
+public class HubsHome
+{
+	private static Logger logger = Logger.getLogger("HubsHome");
+
+	/**
+	 * returns hub for id
+	 * 
+	 * @param hub id
+	 * @return
+	 */
+	public static Hubs getHubById(Session session, int hub_id)
+	{
+		Hubs result = null;
+		result = (Hubs) session.createCriteria(Hubs.class).add(Restrictions.eq("hubId", hub_id)).uniqueResult();
+		return result;
+
+	}
+	
+	public static Hubs getHubByName(Session session, String hubName)
+	{
+		Hubs result = null;
+		result = (Hubs) session.createCriteria(Hubs.class).add(Restrictions.eq("localName", hubName)).uniqueResult();
+		return result;
+
+	}
+
+	
+	}

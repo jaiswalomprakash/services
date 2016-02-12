@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model
+END
+HubAccesstoken.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/HubAccesstoken.java
+END
+Hubs.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/Hubs.java
+END
+Sensor.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/Sensor.java
+END
+GeneralResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/GeneralResponse.java
+END
+HubsSensorMapping.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/HubsSensorMapping.java
+END
+Status.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/Status.java
+END
+HubsSensorMappingId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Tangerine/!svn/ver/871/seniorcare/src/com/seniorcare/cloud/model/HubsSensorMappingId.java
+END

@@ -1,0 +1,165 @@
+package com.seniorcare.cloud;
+
+import java.util.Date;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Response;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
+import com.seniorcare.cloud.dao.HibernateUtil;
+import com.seniorcare.cloud.dao.HubAccessTokenHome;
+import com.seniorcare.cloud.dao.HubsHome;
+import com.seniorcare.cloud.dao.domain.HubAccesstoken;
+import com.seniorcare.cloud.dao.domain.Hubs;
+import com.seniorcare.cloud.mongo.entity.Seniorcare;
+import com.seniorcare.cloud.mongo.impl.MgDbLogsImpl;
+import com.seniorcare.cloud.requests.IoTDevice.LogRequest;
+import com.seniorcare.cloud.responses.GeneralResponse;
+import com.seniorcare.cloud.responses.LoginResponse;
+import com.seniorcare.cloud.responses.Status;
+
+
+public class IoTDeviceRequestHandlerV1 {
+	private static final Logger logger = Logger.getLogger("IoTDeviceSDKRequestHandlerV1");
+	
+	//private static MgEventLogImpl mgEventLogImpl = new MgEventLogImpl();
+	final public static String BEACON = "BEACON";
+	final public static String APPLICATION = "APPLICATION";
+	final public static String FRIDGE = "FRIDGE";
+	
+	/**
+	 * This method is used to store generic log
+	 * @param request
+	 * @return
+	 */
+	public static Response SetDeviceLog(LogRequest request,ServletContext context)
+	{
+		GeneralResponse response = new GeneralResponse();
+		Session session = null;
+		try
+		{
+			session = HibernateUtil.openHibernateSession();
+			Response checkResponse = RequestHandlerHelper.doHubAccesstokenChecks(session, request.getHeader().getAccessToken());
+			if (checkResponse == null || checkResponse.getStatus() != Response.Status.OK.getStatusCode())
+			{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+				return checkResponse;
+			}
+			//check if hub exists
+			Hubs hub = HubsHome.getHubByName(session, request.getHeader().getTransmitterId());
+			if (hub == null)
+			{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+				Status status = new Status(Status.NO_HUB);
+				response.setStatusObject(status);
+				logger.log(Level.INFO, status.toString());
+				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+			}
+			Seniorcare seniorcare = new Seniorcare(request);
+			seniorcare= MgDbLogsImpl.saveEventLogs(seniorcare);					
+			if (seniorcare != null && seniorcare.getEventLogId() !=0 )
+			{
+				HibernateUtil.commitAndCloseHibernateSession(session);
+				logger.log(Level.INFO, Response.Status.OK.toString());
+				return Response.ok(response).build();
+			}
+			else{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+				logger.log(Level.INFO, Response.Status.INTERNAL_SERVER_ERROR.toString());
+				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+			}
+		}
+		catch (HibernateException e)
+		{
+			logger.severe(e.getLocalizedMessage());
+			if (session != null)
+			{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+			}
+			Status status = new Status(Status.DATABASE_ERROR);
+			response.setStatusObject(status);
+			logger.log(Level.INFO, status.toString());
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+		}
+	}
+	
+	
+	public static Response authHub(String hubName)
+	{
+		GeneralResponse response = new GeneralResponse();
+		Session session = null;
+		try
+		{
+			session = HibernateUtil.openHibernateSession();
+			
+			Hubs hub = HubsHome.getHubByName(session, hubName);
+			if (hub == null)
+			{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+				Status status = new Status(Status.NO_HUB);
+				response.setStatusObject(status);
+				logger.log(Level.INFO, status.toString());
+				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+			}
+			
+			//generate accesstoken
+			UUID accessToken = UUID.randomUUID();
+			//store accesstoken
+			
+			HubAccesstoken hubAccessToken = new HubAccesstoken();
+			hubAccessToken.setToken(accessToken.toString());
+			hubAccessToken.setHubs(hub);
+			int ttl = 24 * 60 * 60 * 1000;
+			try
+			{
+				Integer ttlInteger = new Integer(86400000);
+				ttl = ttlInteger.intValue();
+			}
+			catch (NumberFormatException e)
+			{
+				logger.log(Level.SEVERE, e.getLocalizedMessage());
+			}
+			Date validUntil = new Date(System.currentTimeMillis() + ttl);
+			hubAccessToken.setValidUntil(validUntil);
+			hubAccessToken.setCreateDate(new Date());			
+			hubAccessToken = HubAccessTokenHome.storeToken(session, hubAccessToken);
+			if (hubAccessToken != null)
+			{
+				LoginResponse loginResponse = new LoginResponse();
+				loginResponse.setAccessToken(accessToken.toString());
+				loginResponse.setAccessTokenttl(ttl);
+				loginResponse.setHubID(hub.getLocalName());
+				HibernateUtil.commitAndCloseHibernateSession(session);
+				logger.log(Level.INFO, loginResponse.toString());
+				return Response.ok(loginResponse).build();
+			}
+			else
+			{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+				logger.log(Level.INFO, Response.Status.INTERNAL_SERVER_ERROR.toString());
+				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+			}
+		}
+		catch (HibernateException e)
+		{
+			logger.severe(e.getLocalizedMessage());
+			if (session != null)
+			{
+				HibernateUtil.rollbackAndCloseHibernateSession(session);
+			}
+			Status status = new Status(Status.DATABASE_ERROR);
+			response.setStatusObject(status);
+			logger.log(Level.INFO, status.toString());
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+		}
+	}
+
+	
+
+
+}
